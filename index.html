@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Script Skeleton</title>
+  </head>
+  <body>
+    <h1>Welcome</h1>
+    <script>
+      <!-- Put script here --> 
+	  function computerPlay(){
+		let choice = Math.floor(Math.random() * 3) ;
+		switch (choice) {
+		  case 0:
+			return 'r';
+		  case 1:
+			return 'p';
+		  case 2:
+			return 's';
+		}
+      }
+
+	  function game() {
+		let wins = 0;
+		let losses = 0;
+		let draws = 0;
+
+		for (let i = 0; i < 5; i++) {
+		  let player = prompt("Rock, Paper, or Scissors?", '');
+		  player = player.toLowerCase();
+    	  player = player.charAt(0);
+
+		  let computer = computerPlay();
+		  computer = computer.toLowerCase();
+		  computer = computer.charAt(0);
+
+		  console.log(playRound(player, computer));
+		}
+ 
+		function playRound(playerSelection, computerSelection) {
+		  if (playerSelection == computerSelection) {
+			draws += 1;
+			return "Draw"
+		  } 
+
+		  let round = playerSelection + computerSelection;
+			switch (round) {
+			  case 'rp':
+				losses += 1;
+				return "You lose. Paper beats rock."
+			  case 'rs':
+				wins += 1;
+				return "You win. Rock beats scissors."
+			  case 'pr':
+				wins += 1;
+				return "You win. Paper beats rock."
+			  case 'ps':
+				losses += 1;
+				return "You lose. Scissors beat paper."
+			  case 'sr':
+				losses += 1;
+				return "You lose. Rock beats scissors."
+			  case 'sp':
+				wins += 1;
+				return "You win. Scissors beats paper."
+		  }
+        }
+		return "Your record for this game: " + wins + " win(s), " + losses + " loss(es), and " + draws + " draw(s)."
+	  }
+	  console.log(game());
+
+    </script>
+  </body>
+</html>
