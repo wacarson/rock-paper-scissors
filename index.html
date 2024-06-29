@@ -4,7 +4,11 @@
     <title>Script Skeleton</title>
   </head>
   <body>
-    <h1>Welcome</h1>
+    <h1>Play Rock Paper Scissors</h1>
+	<button class="rock">Rock</button>
+	<button class="paper">Paper</button>
+	<button class="scissors">Scissors</button>
+	<div id="score"></div>
     <script>
       <!-- Put script here --> 
 	  function computerPlay(){
@@ -19,6 +23,7 @@
 		}
       }
 
+<!--
 	  function game() {
 		let wins = 0;
 		let losses = 0;
@@ -66,7 +71,75 @@
         }
 		return "Your record for this game: " + wins + " win(s), " + losses + " loss(es), and " + draws + " draw(s)."
 	  }
-	  console.log(game());
+ -->
+  	  brock = document.querySelector(".rock")
+	  bpaper = document.querySelector(".paper")
+	  bscissors = document.querySelector(".scissors")
+	  div = document.querySelector("#score")
+
+	  brock.addEventListener("click", playRound)
+	  bpaper.addEventListener("click", playRound)
+	  bscissors.addEventListener("click", playRound)
+
+		let wins = 0;
+		let losses = 0;
+		let draws = 0;
+
+		function playRound(e) {
+			if (wins == 5 || losses == 5) { reset() }
+
+
+		  let outcome = ''
+		  computerSelection = computerPlay()
+		  playerSelection = e.target.attributes.class.nodeValue.charAt(0)
+		  console.log(playerSelection, computerSelection)
+		  if (playerSelection == computerSelection) {
+			draws += 1;
+			outcome = "Draw"
+		  } 
+
+		  let round = playerSelection + computerSelection;
+			switch (round) {
+			  case 'rp':
+				losses += 1;
+				outcome = "You lose. Paper beats rock."
+				break
+			  case 'rs':
+				wins += 1;
+				outcome = "You win. Rock beats scissors."
+				break
+			  case 'pr':
+				wins += 1;
+				outcome = "You win. Paper beats rock."
+				break
+			  case 'ps':
+				losses += 1;
+				outcome = "You lose. Scissors beat paper."
+				break
+			  case 'sr':
+				losses += 1;
+				outcome = "You lose. Rock beats scissors."
+				break
+			  case 'sp':
+				wins += 1;
+				outcome =  "You win. Scissors beats paper."
+		  }
+
+				if (wins == 5) {
+					outcome = "You win the game!"
+				} else if (losses == 5) {
+					outcome = "Computer wins the game!"
+				}
+				score = wins.toString() + "-" + losses.toString() + "-" + draws.toString() + " "
+				div.textContent = "Score: " + score + "Last round: " + outcome
+		}
+
+		function reset() {
+			wins = 0
+			losses = 0
+			draws = 0
+		}
+
 
     </script>
   </body>
